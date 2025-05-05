@@ -1,4 +1,6 @@
 # Data Aquisition
+conda env remove -n auto_scan
+
 ## recommended: create virtual environment python >= 3.10
 ### 1. Create a new conda environment named "auto_scan" with Python 3.10
 conda create --name auto_scan python=3.10 -y
@@ -29,10 +31,6 @@ or
 curl -L -o sam2.1_hiera_small.pt \
      https://dl.fbaipublicfiles.com/segment_anything_2/092824/sam2.1_hiera_small.pt
 
-
-## intall 
-
-after this, rename the sam2 folder to sam2_repo and open the sam2_repo folder and move the sam2 folder out into the auto_scan folder
 
 ## getting datapoints
 
