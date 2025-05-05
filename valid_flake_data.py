@@ -185,5 +185,5 @@ def valid_flake_data(folder=None):
     print(f"\nData saved to {data_path}")
 
 if __name__ == "__main__":
-    folder ="data/TIT/10x/training_data"
+    folder ="/Users/massimozhang/Desktop/coding/Auto_Scan1/data/TIT/10x/training_data"
     valid_flake_data(folder=folder)

@@ -20,7 +20,7 @@ def invalid_area_data(folder=None):
     # prepare SAM
     predictor = FastSAMPredictor(
         model_cfg="configs/sam2.1/sam2.1_hiera_s.yaml",
-        checkpoint="sam_checkpoints/sam2.1_hiera_small.pt",
+        checkpoint="sam2.1_hiera_small.pt",
         device='cpu'  # or 'cuda'
     )
 
@@ -188,5 +188,5 @@ def invalid_area_data(folder=None):
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    folder ="data/TIT/10x/training_data"
+    folder ="/Users/massimozhang/Desktop/coding/Auto_Scan1/data/TIT/10x/training_data"
     invalid_area_data(folder)

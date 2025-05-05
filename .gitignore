@@ -106,6 +106,7 @@ TIT_10x.h5
 # Project data & checkpoints
 data/
 sam_checkpoints/
+datapoints/
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Custom folders to ignore

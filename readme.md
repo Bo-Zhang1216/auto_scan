@@ -10,8 +10,24 @@ conda activate auto_scan
 python --version
 
 ## First install sam2 by the following steps:
-!git clone https://github.com/facebookresearch/sam2.git && cd sam2
-!pip install -e .
+git clone https://github.com/facebookresearch/sam2.git
+cd sam2
+pip install -e .
+cd ..
+mv sam2 sam2_repo
+mv sam2_repo/sam2 .
+### install the hiera_small checkpoint
+
+wget https://dl.fbaipublicfiles.com/segment_anything_2/092824/sam2.1_hiera_small.pt
+
+or
+
+curl -L -o sam2.1_hiera_small.pt \
+     https://dl.fbaipublicfiles.com/segment_anything_2/092824/sam2.1_hiera_small.pt
+
+
+## intall 
+
 after this, rename the sam2 folder to sam2_repo and open the sam2_repo folder and move the sam2 folder out into the auto_scan folder
 
 ## getting datapoints
