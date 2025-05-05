@@ -9,6 +9,10 @@ conda activate auto_scan
 ### (Optional) 3. Verify you’re on the right Python version
 python --version
 
+### install dependencies
+pip install -r requirements.txt
+
+
 ## First install sam2 by the following steps:
 git clone https://github.com/facebookresearch/sam2.git
 cd sam2
