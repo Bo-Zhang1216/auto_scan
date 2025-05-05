@@ -183,9 +183,9 @@ def test_grid_batched(image_path, rows, cols, radius=5, thickness=-1, batch_size
 
 
 if __name__ == '__main__':
-    model_path = "/Users/massimozhang/Desktop/coding/Ma Lab/TIT_scanning/models/TIT_10x.h5"
+    model_path = "/Users/massimozhang/Desktop/coding/Auto_Scan1/TIT_10x.h5"
     model = keras.models.load_model(model_path)
 
-    test_image_path = "/Users/massimozhang/Desktop/coding/Ma Lab/TIT_scanning/data/10x/train_data/f3_10x.png"
+    test_image_path = "/Users/massimozhang/Desktop/coding/Auto_Scan1/data/TIT/10x/training_data/1.3.10x.png"
     matrix = test_grid_batched(test_image_path, rows=512, cols=512, batch_size=4096)
     print(matrix)

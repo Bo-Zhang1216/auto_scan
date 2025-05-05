@@ -102,6 +102,7 @@ celerybeat-schedule
 *.h5
 *.pt
 TIT_10x.h5
+.json
 
 # Project data & checkpoints
 data/
