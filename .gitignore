@@ -1,3 +1,4 @@
+# ──────────────────────────────────────────────────────────────────────────────
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -51,7 +52,7 @@ venv.bak/
 *.sublime-project
 *.sublime-workspace
 
-# MacOS
+# macOS
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -90,12 +91,23 @@ dmypy.json
 profile_default/
 ipython_config.py
 
-# celery
+# Celery
 celerybeat-schedule
 
 # SageMath
 *.sage.py
 
-# ——— Custom folders to ignore ———
+# ──────────────────────────────────────────────────────────────────────────────
+# Large data & model files (keep out of Git)
+*.h5
+*.pt
+TIT_10x.h5
+
+# Project data & checkpoints
+data/
+sam_checkpoints/
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Custom folders to ignore
 sam2/
 sam2_repo/
