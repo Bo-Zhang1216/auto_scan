@@ -98,7 +98,7 @@ image_path = "/Users/massimozhang/Desktop/coding/Auto_Scan1/data/TIT/10x/trainin
 # Grid sampling ratio (h/ratio × w/ratio grid)
 ratio = 14
 # Batch size for model prediction
-batch_size = 4096
+batch_size = 230000
 # Circle draw settings
 radius = 5
 thickness = -1

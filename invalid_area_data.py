@@ -167,7 +167,7 @@ def invalid_area_data(folder=None):
             # with open(tp, "w") as f: json.dump(true_data, f, indent=4)
             with open(fp, "w") as f: json.dump(false_data, f, indent=4)
 
-            print(f"Saved {len(tlist)} true / {len(flist)} false for {fn}")
+            print(f"Saved {len(flist)} false for {fn}")
 
         # next image
         elif key == ord('d'):
