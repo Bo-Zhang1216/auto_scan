@@ -39,96 +39,7 @@ def filter_clusters_by_size(binary_mat, min_size=5, connectivity=8):
             filtered[labels == lbl] = 1
     return filtered
 
-
-def test_grid(image_path, rows, cols, radius=10, thickness=-1):
-    """
-    Sample points on a rows×cols grid over the image, predict at each point,
-    draw red/green circles for classes 0/1, and return a matrix of class labels.
-    Small clusters (<5 points) are zeroed out.
-    """
-    img_bgr = cv2.imread(image_path)
-    if img_bgr is None:
-        raise FileNotFoundError(f"Could not load image: {image_path}")
-    img_display = img_bgr.copy()
-    img_rgb     = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
-    bg_color    = compute_background_color(img_rgb)
-
-    h, w = img_rgb.shape[:2]
-    dy, dx = h / rows, w / cols
-    grid = np.zeros((rows, cols), dtype=int)
-
-    for idx in tqdm(range(rows * cols), desc="Grid points"):
-        i = idx // cols
-        j = idx % cols
-        y = int((i + 0.5) * dy)
-        x = int((j + 0.5) * dx)
-        flake_color = img_rgb[y, x].tolist()
-
-        vec  = np.array(bg_color + flake_color, dtype=np.float32).reshape(1, -1) / 255.0
-        pred = model.predict(vec, verbose=0)
-        cls  = int(np.argmax(pred, axis=1)[0])
-        grid[i, j] = cls
-
-        color = (0, 255, 0) if cls == 1 else (0, 0, 255)
-        cv2.circle(img_display, (x, y), radius, color, thickness)
-
-    # filter small clusters
-    grid = filter_clusters_by_size(grid, min_size=5, connectivity=8)
-
-    cv2.imshow(f'Grid Test ({rows}×{cols})', img_display)
-    cv2.waitKey(0)
-    cv2.destroyWindow(f'Grid Test ({rows}×{cols})')
-    return grid
-
-
-def test_grid_live(image_path, rows, cols, radius=5, thickness=-1, delay=1):
-    """
-    Sample points on a rows×cols grid over the image, predict at each point,
-    draw red/green circles for classes 0/1 live, and return a matrix of class labels.
-    Small clusters (<5 points) are zeroed out.
-    """
-    img_bgr = cv2.imread(image_path)
-    if img_bgr is None:
-        raise FileNotFoundError(f"Could not load image: {image_path}")
-    img_display = img_bgr.copy()
-    img_rgb     = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
-    bg_color    = compute_background_color(img_rgb)
-
-    h, w     = img_rgb.shape[:2]
-    dy, dx   = h / rows, w / cols
-    grid     = np.zeros((rows, cols), dtype=int)
-    win_name = f'Live Grid ({rows}×{cols})'
-
-    cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
-    cv2.imshow(win_name, img_display)
-
-    for idx in tqdm(range(rows * cols), desc="Grid points"):
-        i = idx // cols
-        j = idx % cols
-        y = int((i + 0.5) * dy)
-        x = int((j + 0.5) * dx)
-
-        flake_color = img_rgb[y, x].tolist()
-        vec         = np.array(bg_color + flake_color, dtype=np.float32).reshape(1, -1) / 255.0
-        pred        = model.predict(vec, verbose=0)
-        cls         = int(np.argmax(pred, axis=1)[0])
-        grid[i, j]  = cls
-
-        color = (0, 255, 0) if cls == 1 else (0, 0, 255)
-        cv2.circle(img_display, (x, y), radius, color, thickness)
-        cv2.imshow(win_name, img_display)
-        if cv2.waitKey(delay) & 0xFF == 27:
-            break
-
-    # filter small clusters
-    grid = filter_clusters_by_size(grid, min_size=5, connectivity=8)
-
-    cv2.waitKey(0)
-    cv2.destroyWindow(win_name)
-    return grid
-
-
-def test_grid_batched(image_path, rows, cols, radius=5, thickness=-1, batch_size=256):
+def test_grid_batched(image_path, ratio=14, radius=5, thickness=-1, batch_size=256):
     """
     Sample points on a rows×cols grid, predict in batch,
     draw red/green circles for classes 0/1, and return a matrix of class labels.
@@ -143,6 +54,8 @@ def test_grid_batched(image_path, rows, cols, radius=5, thickness=-1, batch_size
     bg_color = compute_background_color(img_rgb)
 
     h, w = img_rgb.shape[:2]
+    print(h,w)
+    rows,cols = int(h/ratio),int(w/ratio)
     dy, dx = h / rows, w / cols
 
     coords = []
@@ -186,6 +99,6 @@ if __name__ == '__main__':
     model_path = "/Users/massimozhang/Desktop/coding/Auto_Scan1/TIT_10x.h5"
     model = keras.models.load_model(model_path)
 
-    test_image_path = "/Users/massimozhang/Desktop/coding/Auto_Scan1/data/TIT/10x/training_data/1.3.10x.png"
-    matrix = test_grid_batched(test_image_path, rows=512, cols=512, batch_size=4096)
+    test_image_path = "/Users/massimozhang/Desktop/coding/Auto_Scan1/data/TIT/10x/training_data/1_10x.png"
+    matrix = test_grid_batched(test_image_path,ratio =14, batch_size=4096)
     print(matrix)
